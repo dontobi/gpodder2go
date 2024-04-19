@@ -94,7 +94,7 @@ $ docker run -d \
 -p 3005:3005 \
 -e NO_AUTH=<true or false> \
 -v <data_directory>:/data \
-ghcr.io/oxtyped/gpodder2go:main
+dontobi/gpodder2go:latest
 ```
 
 With docker compose:
@@ -103,7 +103,7 @@ With docker compose:
 version: '3'
 services:
   gpodder2go:
-    image: ghcr.io/oxtyped/gpodder2go:main
+    image: dontobi/gpodder2go:latest
     ports:
       - 3005:3005
     environment:

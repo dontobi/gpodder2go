@@ -1,0 +1,28 @@
+name: Check Base Image
+
+on:
+  schedule:
+    - cron:  '0 0 * * FRI'
+  workflow_dispatch:
+
+jobs:
+  check-and-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Base Image Checker
+        id: check
+        uses: mkumatag/container-image-updater-action@v1.0.6
+        with:
+          base-image: 'library/alpine:latest'
+          image: 'dontobi/gpodder2go:latest'
+
+      - name: Image update
+        run: echo "Image update required ${{ steps.check.outputs.needs-update }}"
+
+      - name: Trigger build
+        if: steps.check.outputs.needs-update == 'true'
+        uses: benc-uk/workflow-dispatch@v1.2
+        with:
+          workflow: Docker build (Docker)
+          repo: dontobi/gpodder2go
+          token: ${{ secrets.ACTIONS_PAT }}

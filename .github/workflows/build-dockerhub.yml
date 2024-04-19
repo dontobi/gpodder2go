@@ -1,6 +1,6 @@
 # Github action to build Docker image from main branch (tag: latest)
 
-name: Docker build & push to hub.docker.com
+name: Docker build (Docker)
 
 on:
   release:
